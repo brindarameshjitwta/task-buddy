@@ -3,16 +3,12 @@ import { getTasks, deleteTaskFromDB, addTask, updateTask } from "../jsonService"
 import AddTaskModal from './AddTaskModal';
 import EditTaskModal from './EditTaskModal';
 import { toast } from 'react-toastify';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Tabs from './Tabs';
 import TaskHeader from './TaskHeader';
 import TaskFilters from './TaskFilters';
-import { useLocation } from 'react-router-dom';
-import { User } from 'firebase/auth';
+
 
 const TaskList = () => {
-  const location = useLocation();
-  const user = location.state?.user as User;
   const [draggedTask, setDraggedTask] = useState<any>(null);
   const [todoOpen, setTodoOpen] = useState(true);
   const [inProgressOpen, setInProgressOpen] = useState(true);

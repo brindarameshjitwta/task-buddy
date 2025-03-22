@@ -17,7 +17,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ task, onClose, onUpdate }
     createdAt: task?.createdAt,
     attachment: task?.attachment || null,
   });
-  const [attachment, setAttachment] = useState<File | null>(null);
+
   const [activeTab, setActiveTab] = React.useState<'DETAILS' | 'ACTIVITY'>('DETAILS');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [activityLog, setActivityLog] = useState(task?.activityLog || []);
