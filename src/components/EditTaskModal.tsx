@@ -38,28 +38,25 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ task, onClose, onUpdate }
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  useEffect(() => {
-    if (!task?.activityLog) {
-      const creationLog = `Task created on ${formattedDate}`;
-      setActivityLog([creationLog]);
-    }
-  }, [task]);
-
-  const formatDateTime = (date: string | Date) => {
-    const options: Intl.DateTimeFormatOptions = {
+  
+const creationDate: string = updatedTask?.createdAt
+  ? new Date(updatedTask.createdAt).toLocaleString('en-US', {
+      month: 'long',
       day: 'numeric',
-      month: 'short',
       hour: 'numeric',
       minute: 'numeric',
       hour12: true,
-    };
+    })
+  : '';
 
-    const formattedDate = new Date(date).toLocaleString('en-GB', options);
-    return formattedDate.replace(",", " at");
-  };
+useEffect(() => {
+  if (!task?.activityLog && creationDate) {
+    const creationLog = `Task created on ${creationDate}`;
+    setActivityLog([creationLog]);
+  }
+}, [task, creationDate]);
 
-  const formattedDate = formatDateTime(task.createdAt);
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setUpdatedTask((prev) => ({ ...prev, [name]: value }));

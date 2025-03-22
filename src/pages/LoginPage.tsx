@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+
 import { auth, provider, signInWithPopup } from '../firebase';
-import { User } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      setUser(result.user);
       localStorage.setItem('user', JSON.stringify(result.user));
       navigate('/task-list'); // Redirect to task list
     } catch (error) {
@@ -18,7 +15,7 @@ const LoginPage = () => {
     }
   };
 
-  return (
+ return (
     <div className="h-screen bg-[#fff7f7] flex items-center justify-center relative overflow-hidden">
       
       {/* Desktop View */}
